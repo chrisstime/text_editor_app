@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace text_editor_app
 {
-    public partial class Form1 : Form
+    public partial class WordApp : Form
     {
-        public Form1()
+        public WordApp()
         {
             InitializeComponent();
         }
