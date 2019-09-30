@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
 
 namespace text_editor_app
 {
@@ -17,7 +23,56 @@ namespace text_editor_app
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+        }
 
+        private void BoldTextButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BoldTextButton_Click_1(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Bold);
+        }
+
+        private void ItalicsTextButton_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Italic);
+        }
+
+        private void UnderlineTextButton_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
+        }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox1.SelectedRtf, TextDataFormat.Rtf);
+            richTextBox1.SelectedRtf = string.Empty;
+        }
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox1.SelectedRtf, TextDataFormat.Rtf);
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+
+            if (Clipboard.ContainsText(TextDataFormat.Rtf))
+            {
+                richTextBox1.AppendText(Clipboard.GetText(TextDataFormat.Rtf));
+            }
         }
     }
 }
