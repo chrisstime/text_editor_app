@@ -57,21 +57,20 @@ namespace text_editor_app
 
         private void cutToolStripButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(richTextBox1.SelectedRtf, TextDataFormat.Rtf);
-            richTextBox1.SelectedRtf = string.Empty;
+            richTextBox1.Cut();
         }
 
         private void copyToolStripButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(richTextBox1.SelectedRtf, TextDataFormat.Rtf);
+            richTextBox1.Copy();
         }
 
         private void pasteToolStripButton_Click(object sender, EventArgs e)
         {
 
-            if (Clipboard.ContainsText(TextDataFormat.Rtf))
+            if (richTextBox1.CanPaste(DataFormats.GetFormat(DataFormats.Rtf)))
             {
-                richTextBox1.AppendText(Clipboard.GetText(TextDataFormat.Rtf));
+                richTextBox1.Paste();
             }
         }
     }
