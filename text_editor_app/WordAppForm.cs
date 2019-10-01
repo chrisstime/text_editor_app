@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 
 namespace text_editor_app
 {
@@ -57,6 +58,26 @@ namespace text_editor_app
         private void UnderlineText(object sender, EventArgs e)
         {
             richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
+        }
+
+        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                Filter = "All files (*.*)|*.*rtf files (*.rtf)|*.rtf|",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    // Code to write the stream goes here.
+                    myStream.Close();
+                }
+            }
         }
     }
 }
