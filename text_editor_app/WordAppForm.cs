@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Drawing.Text;
+using System.IO;
 
 namespace text_editor_app
 {
@@ -19,7 +17,11 @@ namespace text_editor_app
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
+            FontStyleComboBox.SelectedItem = richTextBox1.Font.Name;
+            FontStyleComboBox.SelectedText = richTextBox1.Font.Name;
+            FontSizeComboBox.SelectedItem = richTextBox1.Font.Size;
+            FontSizeComboBox.SelectedText = richTextBox1.Font.Size.ToString();
         }
 
         private void Cut(object sender, EventArgs e)
@@ -52,12 +54,14 @@ namespace text_editor_app
 
         private void UnderlineText(object sender, EventArgs e)
         {
+            // do a try catch in case nothing is selected.
             richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
         }
 
         private void SaveFile(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.OverwritePrompt = true;
             saveFileDialog1.Filter = "All files (*.*)|*.*|RTF files (*.rtf)|*.rtf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
@@ -83,9 +87,9 @@ namespace text_editor_app
 
         private void FontSizeComboBox_DropDown(object sender, EventArgs e)
         {
-            int[] fontSizes = Enumerable.Range(8, 75).Where(x => x % 2 == 0).ToArray();
+            int[] fontSizes = Enumerable.Range(8, 75).ToArray();
             foreach(int size in fontSizes)
-                FontSizeComboBox.Items.Add(size);
+                FontSizeComboBox.Items.Add(size.ToString());
         }
 
         private void FontStyleComboBox_DropDown(object sender, EventArgs e)
@@ -94,6 +98,23 @@ namespace text_editor_app
             FontFamily[] fonts = availableFonts.Families.ToArray();
             foreach (FontFamily fontFam in fonts)
                 FontStyleComboBox.Items.Add(fontFam.Name);
+        }
+
+        private void FontStyleComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(FontStyleComboBox.Text, this.Font.Size, richTextBox1.SelectionFont.Style);
+        }
+
+        private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            float.TryParse(FontSizeComboBox.Text, out float updatedFontSize);
+            richTextBox1.SelectionFont = new Font(this.Font.FontFamily, updatedFontSize, richTextBox1.SelectionFont.Style);
+        }
+
+        private void SelectAllText(object sender, EventArgs e)
+        {
+            richTextBox1.SelectAll();
+            richTextBox1.Focus();
         }
     }
 }
