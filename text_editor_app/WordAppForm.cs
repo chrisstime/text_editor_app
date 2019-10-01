@@ -60,16 +60,29 @@ namespace text_editor_app
             richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
         }
 
-        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        private void SaveFile(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All files (*.*)|*.*|rtf files (*.rtf)|*.rtf";
+            saveFileDialog1.Filter = "All files (*.*)|*.*|RTF files (*.rtf)|*.rtf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
             {
                 richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+            }
+        }
+
+        private void OpenFile(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile1 = new OpenFileDialog();
+
+            openFile1.DefaultExt = "*.rtf";
+            openFile1.Filter = "RTF Files|*.rtf";
+
+            if (openFile1.ShowDialog() == DialogResult.OK && openFile1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(openFile1.FileName);
             }
         }
     }
