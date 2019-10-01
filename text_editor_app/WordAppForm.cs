@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.IO;
+using System.Drawing.Text;
 
 namespace text_editor_app
 {
@@ -18,11 +18,6 @@ namespace text_editor_app
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -84,6 +79,21 @@ namespace text_editor_app
             {
                 richTextBox1.LoadFile(openFile1.FileName);
             }
+        }
+
+        private void FontSizeComboBox_DropDown(object sender, EventArgs e)
+        {
+            int[] fontSizes = Enumerable.Range(8, 75).Where(x => x % 2 == 0).ToArray();
+            foreach(int size in fontSizes)
+                FontSizeComboBox.Items.Add(size);
+        }
+
+        private void FontStyleComboBox_DropDown(object sender, EventArgs e)
+        {
+            InstalledFontCollection availableFonts = new InstalledFontCollection();
+            FontFamily[] fonts = availableFonts.Families.ToArray();
+            foreach (FontFamily fontFam in fonts)
+                FontStyleComboBox.Items.Add(fontFam.Name);
         }
     }
 }
