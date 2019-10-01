@@ -44,18 +44,18 @@ namespace text_editor_app
 
         private void BoldText(object sender, EventArgs e)
         {
-            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Bold);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, richTextBox1.SelectionFont.Style ^ FontStyle.Bold);
         }
 
         private void ItalicText(object sender, EventArgs e)
         {
-            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Italic);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, richTextBox1.SelectionFont.Style ^ FontStyle.Italic);
         }
 
         private void UnderlineText(object sender, EventArgs e)
         {
             // do a try catch in case nothing is selected.
-            richTextBox1.SelectionFont = new Font(this.Font, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
         }
 
         private void SaveFile(object sender, EventArgs e)
@@ -102,13 +102,13 @@ namespace text_editor_app
 
         private void FontStyleComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            richTextBox1.SelectionFont = new Font(FontStyleComboBox.Text, this.Font.Size, richTextBox1.SelectionFont.Style);
+            richTextBox1.SelectionFont = new Font(FontStyleComboBox.Text, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style);
         }
 
         private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             float.TryParse(FontSizeComboBox.Text, out float updatedFontSize);
-            richTextBox1.SelectionFont = new Font(this.Font.FontFamily, updatedFontSize, richTextBox1.SelectionFont.Style);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, updatedFontSize, richTextBox1.SelectionFont.Style);
         }
 
         private void SelectAllText(object sender, EventArgs e)
