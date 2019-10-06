@@ -10,6 +10,8 @@ namespace text_editor_app
 {
     public partial class WordApp : Form
     {
+        private string currentFilePath;
+
         public WordApp()
         {
             InitializeComponent();
@@ -65,6 +67,35 @@ namespace text_editor_app
             saveFileDialog1.Filter = "All files (*.*)|*.*|RTF files (*.rtf)|*.rtf";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.Title = "Save File";
+
+            if (!String.IsNullOrEmpty(currentFilePath))
+            {
+                try
+                {
+                    richTextBox1.SaveFile(currentFilePath, RichTextBoxStreamType.RichText);
+                }
+                catch
+                {
+                    MessageBox.Show("Could not save file. Please try again.", "Error Saving File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                currentFilePath = Path.GetFullPath(saveFileDialog1.FileName);
+            }
+        }
+
+        private void SaveFileAs(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.OverwritePrompt = true;
+            saveFileDialog1.Filter = "All files (*.*)|*.*|RTF files (*.rtf)|*.rtf";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.Title = "Save File As";
+            saveFileDialog1.FileName = Path.GetFileName(currentFilePath);
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName.Length > 0)
             {
@@ -82,6 +113,7 @@ namespace text_editor_app
             if (openFile1.ShowDialog() == DialogResult.OK && openFile1.FileName.Length > 0)
             {
                 richTextBox1.LoadFile(openFile1.FileName);
+                currentFilePath = Path.GetFullPath(openFile1.FileName);
             }
         }
 
