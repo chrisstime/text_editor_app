@@ -148,5 +148,11 @@ namespace text_editor_app
             richTextBox1.SelectAll();
             richTextBox1.Focus();
         }
+
+        private void About(object sender, EventArgs e)
+        {
+            string version = System.Windows.Forms.Application.ProductVersion;
+            MessageBox.Show(String.Format("Wripe Text Editor\nApp Version {0}", version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
