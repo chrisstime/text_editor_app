@@ -35,6 +35,8 @@
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.RegisterLink = new System.Windows.Forms.LinkLabel();
+            this.RegisterDesc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UserNameInput
@@ -98,11 +100,36 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Login";
             // 
+            // RegisterLink
+            // 
+            this.RegisterLink.AutoSize = true;
+            this.RegisterLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterLink.Location = new System.Drawing.Point(35, 272);
+            this.RegisterLink.Name = "RegisterLink";
+            this.RegisterLink.Size = new System.Drawing.Size(96, 13);
+            this.RegisterLink.TabIndex = 6;
+            this.RegisterLink.TabStop = true;
+            this.RegisterLink.Text = "Create an Account";
+            this.RegisterLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegisterLink_LinkClicked);
+            // 
+            // RegisterDesc
+            // 
+            this.RegisterDesc.AutoSize = true;
+            this.RegisterDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterDesc.Location = new System.Drawing.Point(35, 252);
+            this.RegisterDesc.Name = "RegisterDesc";
+            this.RegisterDesc.Size = new System.Drawing.Size(122, 13);
+            this.RegisterDesc.TabIndex = 7;
+            this.RegisterDesc.Text = "Don\'t have an account?";
+            this.RegisterDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 312);
+            this.Controls.Add(this.RegisterDesc);
+            this.Controls.Add(this.RegisterLink);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PasswordLabel);
@@ -125,5 +152,7 @@
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel RegisterLink;
+        private System.Windows.Forms.Label RegisterDesc;
     }
 }

@@ -80,5 +80,12 @@ namespace text_editor_app
 
             return fileContent;
         }
+
+        private void RegisterLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form registerForm = new RegisterForm();
+            registerForm.Show();
+            Hide();
+        }
     }
 }
