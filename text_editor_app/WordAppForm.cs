@@ -12,6 +12,8 @@ namespace text_editor_app
     {
         private string currentFilePath;
 
+        //User user = new User();
+
         public WordApp()
         {
             InitializeComponent();
@@ -24,6 +26,7 @@ namespace text_editor_app
             FontStyleComboBox.SelectedText = richTextBox1.Font.Name;
             FontSizeComboBox.SelectedItem = richTextBox1.Font.Size;
             FontSizeComboBox.SelectedText = richTextBox1.Font.Size.ToString();
+            UserNameView.Text = String.Format("Username: {0}", User.UserName);
         }
 
         private void Cut(object sender, EventArgs e)
@@ -153,6 +156,13 @@ namespace text_editor_app
         {
             string version = System.Windows.Forms.Application.ProductVersion;
             MessageBox.Show(String.Format("Wripe Text Editor\nApp Version {0}", version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Form newLogin = new LoginForm();
+            newLogin.Show();
+            Hide();
         }
     }
 }
