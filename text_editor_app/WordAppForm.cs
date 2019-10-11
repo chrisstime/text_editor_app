@@ -12,8 +12,6 @@ namespace text_editor_app
     {
         private string currentFilePath;
 
-        //User user = new User();
-
         public WordApp()
         {
             InitializeComponent();
@@ -21,12 +19,28 @@ namespace text_editor_app
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
+            SetupRichTextbox();
             FontStyleComboBox.SelectedItem = richTextBox1.Font.Name;
             FontStyleComboBox.SelectedText = richTextBox1.Font.Name;
             FontSizeComboBox.SelectedItem = richTextBox1.Font.Size;
             FontSizeComboBox.SelectedText = richTextBox1.Font.Size.ToString();
             UserNameView.Text = String.Format("Username: {0}", User.UserName);
+
+            int[] fontSizes = Enumerable.Range(8, 75).ToArray();
+            foreach (int size in fontSizes)
+                FontSizeComboBox.Items.Add(size.ToString());
+
+            InstalledFontCollection availableFonts = new InstalledFontCollection();
+            FontFamily[] fonts = availableFonts.Families.ToArray();
+            foreach (FontFamily fontFam in fonts)
+                FontStyleComboBox.Items.Add(fontFam.Name);
+        }
+
+        private void SetupRichTextbox()
+        {
+            richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
+            if (User.Type.Equals(User.UserType.View)) 
+                richTextBox1.ReadOnly = true;
         }
 
         private void Cut(object sender, EventArgs e)
@@ -118,21 +132,6 @@ namespace text_editor_app
                 richTextBox1.LoadFile(openFile1.FileName);
                 currentFilePath = Path.GetFullPath(openFile1.FileName);
             }
-        }
-
-        private void FontSizeComboBox_DropDown(object sender, EventArgs e)
-        {
-            int[] fontSizes = Enumerable.Range(8, 75).ToArray();
-            foreach(int size in fontSizes)
-                FontSizeComboBox.Items.Add(size.ToString());
-        }
-
-        private void FontStyleComboBox_DropDown(object sender, EventArgs e)
-        {
-            InstalledFontCollection availableFonts = new InstalledFontCollection();
-            FontFamily[] fonts = availableFonts.Families.ToArray();
-            foreach (FontFamily fontFam in fonts)
-                FontStyleComboBox.Items.Add(fontFam.Name);
         }
 
         private void FontStyleComboBox_SelectedIndexChanged(object sender, EventArgs e)

@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.CreateAccountButton = new System.Windows.Forms.Button();
             this.CancelAccountCreate = new System.Windows.Forms.LinkLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.UsernameField = new System.Windows.Forms.TextBox();
+            this.PasswordField = new System.Windows.Forms.TextBox();
+            this.FNameField = new System.Windows.Forms.TextBox();
+            this.LNameField = new System.Windows.Forms.TextBox();
+            this.DobDatePicker = new System.Windows.Forms.DateTimePicker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.UserType = new System.Windows.Forms.ComboBox();
+            this.UserTypeComboBox = new System.Windows.Forms.ComboBox();
             this.CreateAccountHeading = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.UsernameLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.CreateAccountButton.TabIndex = 0;
             this.CreateAccountButton.Text = "Create Account";
             this.CreateAccountButton.UseVisualStyleBackColor = false;
+            this.CreateAccountButton.Click += new System.EventHandler(this.CreateAccountButton_Click);
             // 
             // CancelAccountCreate
             // 
@@ -68,56 +69,60 @@
             this.CancelAccountCreate.TabIndex = 1;
             this.CancelAccountCreate.TabStop = true;
             this.CancelAccountCreate.Text = "Cancel";
+            this.CancelAccountCreate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CancelAccountCreate_LinkClicked);
             // 
-            // textBox1
+            // UsernameField
             // 
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(41, 95);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(233, 23);
-            this.textBox1.TabIndex = 2;
+            this.UsernameField.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameField.Location = new System.Drawing.Point(41, 95);
+            this.UsernameField.Name = "UsernameField";
+            this.UsernameField.Size = new System.Drawing.Size(233, 23);
+            this.UsernameField.TabIndex = 2;
             // 
-            // textBox2
+            // PasswordField
             // 
-            this.textBox2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(302, 95);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(233, 23);
-            this.textBox2.TabIndex = 3;
+            this.PasswordField.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordField.Location = new System.Drawing.Point(302, 95);
+            this.PasswordField.Name = "PasswordField";
+            this.PasswordField.PasswordChar = '*';
+            this.PasswordField.Size = new System.Drawing.Size(233, 23);
+            this.PasswordField.TabIndex = 3;
             // 
-            // textBox3
+            // FNameField
             // 
-            this.textBox3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(41, 164);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(233, 23);
-            this.textBox3.TabIndex = 4;
+            this.FNameField.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FNameField.Location = new System.Drawing.Point(41, 164);
+            this.FNameField.Name = "FNameField";
+            this.FNameField.Size = new System.Drawing.Size(233, 23);
+            this.FNameField.TabIndex = 4;
             // 
-            // textBox4
+            // LNameField
             // 
-            this.textBox4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(302, 164);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(233, 23);
-            this.textBox4.TabIndex = 5;
+            this.LNameField.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LNameField.Location = new System.Drawing.Point(302, 164);
+            this.LNameField.Name = "LNameField";
+            this.LNameField.Size = new System.Drawing.Size(233, 23);
+            this.LNameField.TabIndex = 5;
             // 
-            // dateTimePicker1
+            // DobDatePicker
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(302, 234);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(233, 23);
-            this.dateTimePicker1.TabIndex = 6;
+            this.DobDatePicker.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DobDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DobDatePicker.Location = new System.Drawing.Point(302, 234);
+            this.DobDatePicker.MaxDate = new System.DateTime(2019, 10, 11, 0, 0, 0, 0);
+            this.DobDatePicker.Name = "DobDatePicker";
+            this.DobDatePicker.Size = new System.Drawing.Size(233, 23);
+            this.DobDatePicker.TabIndex = 6;
+            this.DobDatePicker.Value = new System.DateTime(2019, 10, 11, 0, 0, 0, 0);
             // 
-            // UserType
+            // UserTypeComboBox
             // 
-            this.UserType.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UserType.FormattingEnabled = true;
-            this.UserType.Location = new System.Drawing.Point(41, 234);
-            this.UserType.Name = "UserType";
-            this.UserType.Size = new System.Drawing.Size(233, 24);
-            this.UserType.TabIndex = 7;
+            this.UserTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UserTypeComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserTypeComboBox.Location = new System.Drawing.Point(41, 234);
+            this.UserTypeComboBox.Name = "UserTypeComboBox";
+            this.UserTypeComboBox.Size = new System.Drawing.Size(233, 24);
+            this.UserTypeComboBox.TabIndex = 7;
             // 
             // CreateAccountHeading
             // 
@@ -129,15 +134,15 @@
             this.CreateAccountHeading.TabIndex = 8;
             this.CreateAccountHeading.Text = "Create A Wripe Account";
             // 
-            // label1
+            // UsernameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(39, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Username:";
+            this.UsernameLabel.AutoSize = true;
+            this.UsernameLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameLabel.Location = new System.Drawing.Point(39, 76);
+            this.UsernameLabel.Name = "UsernameLabel";
+            this.UsernameLabel.Size = new System.Drawing.Size(87, 16);
+            this.UsernameLabel.TabIndex = 9;
+            this.UsernameLabel.Text = "*Username:";
             // 
             // label2
             // 
@@ -199,14 +204,14 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.CreateAccountHeading);
-            this.Controls.Add(this.UserType);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.UserTypeComboBox);
+            this.Controls.Add(this.DobDatePicker);
+            this.Controls.Add(this.LNameField);
+            this.Controls.Add(this.FNameField);
+            this.Controls.Add(this.PasswordField);
+            this.Controls.Add(this.UsernameField);
             this.Controls.Add(this.CancelAccountCreate);
             this.Controls.Add(this.CreateAccountButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -222,15 +227,15 @@
 
         private System.Windows.Forms.Button CreateAccountButton;
         private System.Windows.Forms.LinkLabel CancelAccountCreate;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox UsernameField;
+        private System.Windows.Forms.TextBox PasswordField;
+        private System.Windows.Forms.TextBox FNameField;
+        private System.Windows.Forms.TextBox LNameField;
+        private System.Windows.Forms.DateTimePicker DobDatePicker;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.ComboBox UserType;
+        private System.Windows.Forms.ComboBox UserTypeComboBox;
         private System.Windows.Forms.Label CreateAccountHeading;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label UsernameLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

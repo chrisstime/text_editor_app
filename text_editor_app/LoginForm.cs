@@ -53,7 +53,7 @@ namespace text_editor_app
                 {
                     User.UserName = credentials[0];
                     User.Password = credentials[1];
-                    User.PermissionLevel = credentials[2];
+                    User.Type = credentials[2].ToLower().Equals("view") ? User.UserType.View : User.UserType.Edit;
                     User.FName = credentials[3];
                     User.LName = credentials[4];
                     User.DOB = credentials[5];
