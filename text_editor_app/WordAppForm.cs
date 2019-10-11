@@ -73,7 +73,6 @@ namespace text_editor_app
 
         private void UnderlineText(object sender, EventArgs e)
         {
-            // do a try catch in case nothing is selected.
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, richTextBox1.SelectionFont.Style ^ FontStyle.Underline);
         }
 

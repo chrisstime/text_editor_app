@@ -13,7 +13,7 @@ namespace text_editor_app
 {
     public partial class RegisterForm : Form
     {
-        private static readonly string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        private static readonly string projectDir = AppDomain.CurrentDomain.BaseDirectory;
 
         public RegisterForm()
         {
@@ -75,10 +75,8 @@ namespace text_editor_app
             try
             {
                 StreamWriter sw;
-                // This text is added only once to the file.
                 if (!File.Exists(path))
                 {
-                    // Create a file to write to.
                     _ = File.CreateText(path);
                 }
 

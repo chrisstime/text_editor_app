@@ -13,7 +13,7 @@ namespace text_editor_app
 {
     public partial class LoginForm : Form
     {
-        private static readonly string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        private static readonly string projectDir = AppDomain.CurrentDomain.BaseDirectory;
 
         public LoginForm()
         {
