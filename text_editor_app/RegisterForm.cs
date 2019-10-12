@@ -13,7 +13,7 @@ namespace text_editor_app
 {
     public partial class RegisterForm : Form
     {
-        private static readonly string projectDir = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
 
         public RegisterForm()
         {
@@ -26,7 +26,7 @@ namespace text_editor_app
 
         private void CancelAccountCreate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            backToLoginForm();
+            BackToLoginScreen();
         }
 
         private void CreateAccountButton_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace text_editor_app
                     "User Added Successfully",
                     MessageBoxButtons.OK
                     );
-                backToLoginForm();
+                BackToLoginScreen();
             }
             else
             {
@@ -56,12 +56,12 @@ namespace text_editor_app
                     MessageBoxButtons.RetryCancel
                     );
                 if (dialogResult == DialogResult.Cancel)
-                    backToLoginForm();
+                    BackToLoginScreen();
             }
                 
         }
 
-        private void backToLoginForm()
+        private void BackToLoginScreen()
         {
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
@@ -74,18 +74,18 @@ namespace text_editor_app
             
             try
             {
-                StreamWriter sw;
+                StreamWriter streamWriter;
                 if (!File.Exists(path))
                 {
                     _ = File.CreateText(path);
                 }
 
                 bool addNewLine = true;
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                using (BinaryReader rd = new BinaryReader(fs))
+                using (FileStream fileStream = new FileStream(path, FileMode.Open))
+                using (BinaryReader binaryReader = new BinaryReader(fileStream))
                 {
-                    fs.Position = fs.Length - 1;
-                    int last = rd.Read();
+                    fileStream.Position = fileStream.Length - 1;
+                    int last = binaryReader.Read();
 
                     // The last byte is 10 if there is a LineFeed 
                     if (last == 10)
@@ -93,12 +93,14 @@ namespace text_editor_app
                 }
                 string allLines = (addNewLine ? Environment.NewLine + details : details);
 
-                using (sw = File.AppendText(path))
+                using (streamWriter = File.AppendText(path))
                 {
-                    sw.WriteLine(allLines);
+                    streamWriter.WriteLine(allLines);
                 }
+                
+                streamWriter.Close();
 
-                sw.Close();
+                UserList.AddUser(details);
 
                 return true;
             }
@@ -107,6 +109,11 @@ namespace text_editor_app
                 Console.WriteLine(e.Message);
             }
             return false;
+        }
+
+        private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            BackToLoginScreen();
         }
     }
 }

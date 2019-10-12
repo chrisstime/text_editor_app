@@ -218,6 +218,7 @@
             this.Name = "RegisterForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Create An Account";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegisterForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

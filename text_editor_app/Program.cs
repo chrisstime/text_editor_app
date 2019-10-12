@@ -16,6 +16,8 @@ namespace text_editor_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            UserList.LoadUsers("login.txt");
             Application.Run(new LoginForm());
         }
     }

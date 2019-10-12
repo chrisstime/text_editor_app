@@ -11,24 +11,33 @@ namespace text_editor_app
     public partial class WordApp : Form
     {
         private string currentFilePath;
+        User currentUser;
 
-        public WordApp()
+        public WordApp(User user)
         {
             InitializeComponent();
+            currentUser = user;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             SetupRichTextbox();
+            SetupFontStyle();
+            SetupFontSize();
+            UserNameView.Text = String.Format("Username: {0}", currentUser.UserName);
+        }
+
+        private void SetupRichTextbox()
+        {
+            richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
+            if (currentUser.Type.Equals(User.UserType.View)) 
+                richTextBox1.ReadOnly = true;
+        }
+
+        private void SetupFontStyle()
+        {
             FontStyleComboBox.SelectedItem = richTextBox1.Font.Name;
             FontStyleComboBox.SelectedText = richTextBox1.Font.Name;
-            FontSizeComboBox.SelectedItem = richTextBox1.Font.Size;
-            FontSizeComboBox.SelectedText = richTextBox1.Font.Size.ToString();
-            UserNameView.Text = String.Format("Username: {0}", User.UserName);
-
-            int[] fontSizes = Enumerable.Range(8, 75).ToArray();
-            foreach (int size in fontSizes)
-                FontSizeComboBox.Items.Add(size.ToString());
 
             InstalledFontCollection availableFonts = new InstalledFontCollection();
             FontFamily[] fonts = availableFonts.Families.ToArray();
@@ -36,11 +45,14 @@ namespace text_editor_app
                 FontStyleComboBox.Items.Add(fontFam.Name);
         }
 
-        private void SetupRichTextbox()
+        private void SetupFontSize()
         {
-            richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
-            if (User.Type.Equals(User.UserType.View)) 
-                richTextBox1.ReadOnly = true;
+            FontSizeComboBox.SelectedItem = richTextBox1.Font.Size;
+            FontSizeComboBox.SelectedText = richTextBox1.Font.Size.ToString();
+
+            int[] fontSizes = Enumerable.Range(8, 75).ToArray();
+            foreach (int size in fontSizes)
+                FontSizeComboBox.Items.Add(size.ToString());
         }
 
         private void Cut(object sender, EventArgs e)
@@ -158,9 +170,27 @@ namespace text_editor_app
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
+            BackToLoginScreen();
+        }
+
+        private void BackToLoginScreen()
+        {
             Form newLogin = new LoginForm();
             newLogin.Show();
-            Hide();
+
+            Application.OpenForms.Cast<Form>().Where(x => !(x is LoginForm)).ToList().ForEach(x => x.Close());
+        }
+
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form anotherWordScreen = new WordApp(currentUser);
+            anotherWordScreen.Show();
+        }
+
+        private void WordApp_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!(Application.OpenForms.Cast<Form>().Where(x => (x is WordApp)).Any()))
+                BackToLoginScreen();
         }
     }
 }

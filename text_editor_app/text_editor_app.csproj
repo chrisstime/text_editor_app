@@ -82,6 +82,7 @@
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="UserList.cs" />
     <Compile Include="WordAppForm.cs">
       <SubType>Form</SubType>
     </Compile>
