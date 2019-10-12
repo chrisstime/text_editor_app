@@ -109,7 +109,7 @@
             this.DobDatePicker.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DobDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DobDatePicker.Location = new System.Drawing.Point(302, 234);
-            this.DobDatePicker.MaxDate = new System.DateTime(2019, 10, 11, 0, 0, 0, 0);
+            this.DobDatePicker.MaxDate = new System.DateTime(2029, 10, 12, 0, 0, 0, 0);
             this.DobDatePicker.Name = "DobDatePicker";
             this.DobDatePicker.Size = new System.Drawing.Size(233, 23);
             this.DobDatePicker.TabIndex = 6;

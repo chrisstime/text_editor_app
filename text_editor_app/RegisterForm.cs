@@ -22,6 +22,7 @@ namespace text_editor_app
                 UserTypeComboBox.Items.Add(type);
             DobDatePicker.Format = DateTimePickerFormat.Custom;
             DobDatePicker.CustomFormat = "dd-MM-yyyy";
+            DobDatePicker.MaxDate = DateTime.Today;
         }
 
         private void CancelAccountCreate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
