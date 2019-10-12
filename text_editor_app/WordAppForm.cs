@@ -30,6 +30,7 @@ namespace text_editor_app
         private void SetupRichTextbox()
         {
             richTextBox1.Font = new Font(this.Font.Name, 9, this.Font.Style);
+            richTextBox1.ShortcutsEnabled = true;
             if (currentUser.Type.Equals(User.UserType.View)) 
                 richTextBox1.ReadOnly = true;
         }
@@ -145,6 +146,25 @@ namespace text_editor_app
             }
         }
 
+        void WordApp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                SaveFile(sender, e);
+                // Stop other controls from receiving the event.
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.O)
+            {
+                OpenFile(sender, e);
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.N)
+            {
+                NewWordWindow();
+            }
+        }
+
         private void FontStyleComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBox1.SelectionFont = new Font(FontStyleComboBox.Text, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style);
@@ -164,24 +184,32 @@ namespace text_editor_app
 
         private void About(object sender, EventArgs e)
         {
-            string version = System.Windows.Forms.Application.ProductVersion;
-            MessageBox.Show(String.Format("Wripe Text Editor\nApp Version {0}", version), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string version = Application.ProductVersion;
+            MessageBox.Show(
+                String.Format("Wripe Text Editor\nApp Version {0}", version),
+                "About",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            BackToLoginScreen();
+            Application.OpenForms.Cast<Form>().Where(x => (x is WordApp)).ToList().ForEach(x => x.Close());
         }
 
         private void BackToLoginScreen()
         {
             Form newLogin = new LoginForm();
             newLogin.Show();
-
-            Application.OpenForms.Cast<Form>().Where(x => !(x is LoginForm)).ToList().ForEach(x => x.Close());
         }
 
-        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewWordWindow_Click(object sender, EventArgs e)
+        {
+            NewWordWindow();
+        }
+
+        private void NewWordWindow()
         {
             Form anotherWordScreen = new WordApp(currentUser);
             anotherWordScreen.Show();
