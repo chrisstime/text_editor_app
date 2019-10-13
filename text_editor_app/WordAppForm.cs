@@ -38,7 +38,7 @@ namespace text_editor_app
             richTextBox1.ShortcutsEnabled = true;
 
             // Set the rich text box to read only if the user is only allowed to view.
-            if (currentUser.CanEdit()) 
+            if (!currentUser.CanEdit()) 
                 richTextBox1.ReadOnly = true;
         }
 
