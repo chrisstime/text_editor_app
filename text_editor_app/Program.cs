@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace text_editor_app
@@ -17,7 +14,9 @@ namespace text_editor_app
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Load the users from the login text file
             UserList.LoadUsers("login.txt");
+            // Run the login form
             Application.Run(new LoginForm());
         }
     }

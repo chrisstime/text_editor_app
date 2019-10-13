@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace text_editor_app
 {
+    // Class for the login form
     public partial class LoginForm : Form
     {
         public LoginForm()
@@ -20,7 +13,10 @@ namespace text_editor_app
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            // Get user with matching username and password from list of users (if there are any).
             User user = UserList.GetUser(UserNameInput.Text, PasswordInput.Text);
+            
+            // Show the word form if a matching user is found, othrewise show error message.
             if (user != null)
             {
                 Form wordForm = new WordApp(user);
@@ -40,6 +36,7 @@ namespace text_editor_app
 
         private void RegisterLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Create a now register form and show it. Subsequently, hid this login form.
             Form registerForm = new RegisterForm();
             registerForm.Show();
             Hide();
@@ -47,6 +44,7 @@ namespace text_editor_app
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // Exit program on login form close.
             Application.Exit();
         }
     }
